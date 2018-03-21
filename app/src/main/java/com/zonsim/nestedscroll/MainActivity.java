@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.zonsim.nestedscroll.nestingscroll.NestedScrollActivity;
+import com.zonsim.nestedscroll.test.TestActivity;
 import com.zonsim.nestedscroll.touch.TouchActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
     
     public void click(View view) {
-        startActivity(new Intent(this, ScrollingActivity.class));
+        startActivity(new Intent(this, TestActivity.class));
         
         
     }
