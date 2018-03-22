@@ -37,7 +37,7 @@
         android:id="@+id/v_always"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:fitsSystemWindows="true"
         android:background="@android:color/holo_green_dark"
         android:gravity="bottom">

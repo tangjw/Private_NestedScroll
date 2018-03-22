@@ -1,6 +1,7 @@
 package com.example.hiphonezhu.nestedscrolling;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.widget.TextView;
  * @version [NestedScrolling, 16/9/13 13:41]
  */
 public class StickyLayout extends LinearLayout implements NestedScrollingParent {
+    
     OverScroller mScroller;
     int maxScrollY; // 最大滚动距离
     
@@ -82,12 +84,12 @@ public class StickyLayout extends LinearLayout implements NestedScrollingParent 
     }
     
     @Override
-    public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+    public boolean onStartNestedScroll(@NonNull View child, @NonNull View target, int nestedScrollAxes) {
         return true;
     }
     
     @Override
-    public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+    public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed) {
         // dy > 0表示子View向上滑动;
         
         // 子View向上滑动且父View的偏移量<ImageView高度
@@ -108,11 +110,11 @@ public class StickyLayout extends LinearLayout implements NestedScrollingParent 
     }
     
     @Override
-    public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+    public void onNestedScroll(@NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
     }
     
     @Override
-    public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+    public boolean onNestedPreFling(@NonNull View target, float velocityX, float velocityY) {
         if (velocityY > 0 && getScrollY() < maxScrollY) // 向上滑动, 且当前View还没滑到最顶部
         {
             fling((int) velocityY, maxScrollY);
@@ -126,16 +128,16 @@ public class StickyLayout extends LinearLayout implements NestedScrollingParent 
     }
     
     @Override
-    public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
+    public boolean onNestedFling(@NonNull View target, float velocityX, float velocityY, boolean consumed) {
         return false;
     }
     
     @Override
-    public void onStopNestedScroll(View child) {
+    public void onStopNestedScroll(@NonNull View child) {
     }
     
     @Override
-    public void onNestedScrollAccepted(View child, View target, int axes) {
+    public void onNestedScrollAccepted(@NonNull View child, @NonNull View target, int axes) {
     }
     
     public void fling(int velocityY, int maxY) {
@@ -167,11 +169,11 @@ public class StickyLayout extends LinearLayout implements NestedScrollingParent 
             int[] location = new int[2];
             tvSticky.getLocationOnScreen(location);
             // Y轴位置 <= 状态栏高度, "假"的自己可见
-            if (location[1] <= statusBarHeight) {
+            /*if (location[1] <= statusBarHeight) {
                 vAlways.setVisibility(View.VISIBLE);
             } else {
                 vAlways.setVisibility(View.INVISIBLE);
-            }
+            }*/
         }
     }
 }

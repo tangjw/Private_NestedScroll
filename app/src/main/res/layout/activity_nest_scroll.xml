@@ -1,26 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zonsim.nestedscroll.nestingscroll.NestedScrollActivity">
+    android:contentDescription="outer_content_frame">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#CCCC"
+        android:contentDescription="action_bar_container_container">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:onClick="back"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="12dp"
+            android:text="返回"
+            android:textColor="#FFF"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="content_frame">
 
 
-    <com.zonsim.nestedscroll.nestingscroll.NestedParentLayout
-        android:layout_width="200dp"
-        android:background="@color/colorPrimary"
-        android:layout_gravity="center"
-        android:layout_height="200dp">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="page_content">
 
-        <com.zonsim.nestedscroll.nestingscroll.NestedChildView
-            android:layout_width="60dp"
-            android:layout_gravity="center"
-            android:background="@color/colorAccent"
-            android:layout_height="60dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="controls_container">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="background_container">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:contentDescription="hero_promo">
+
+                    <ImageView
+                        android:translationZ="100dp"
+                        android:onClick="toast"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/ic_launcher_round"
+                        android:contentDescription="hero_image"/>
+                </RelativeLayout>
+
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </FrameLayout>
+
+    </FrameLayout>
 
 
-    </com.zonsim.nestedscroll.nestingscroll.NestedParentLayout>
+    <!-- <com.zonsim.nestedscroll.nestingscroll.MyParentLayout
+         android:id="@+id/parent"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_gravity="center"
+         android:background="#cccc"
+         android:orientation="vertical">
+
+         <com.zonsim.nestedscroll.nestingscroll.MyFrameLayout
+             android:id="@+id/fl"
+             android:layout_width="match_parent"
+             android:layout_height="200dp"
+             android:background="@color/colorAccent">
+
+         </com.zonsim.nestedscroll.nestingscroll.MyFrameLayout>
+
+         <android.support.v4.widget.NestedScrollView
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/scrollView"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="32dp"
+             android:layout_marginRight="32dp"
+             android:background="#400f">
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="@dimen/text_margin"
+                 android:text="@string/large_text"/>
+
+         </android.support.v4.widget.NestedScrollView>
+
+         <android.support.v7.widget.RecyclerView
+             android:id="@+id/rv"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="32dp"
+             android:layout_marginRight="32dp"
+             android:background="#6F00"
+             android:visibility="gone">
+
+         </android.support.v7.widget.RecyclerView>
+
+
+     </com.zonsim.nestedscroll.nestingscroll.MyParentLayout>-->
 
 
 </FrameLayout>
