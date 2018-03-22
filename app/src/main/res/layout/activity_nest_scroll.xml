@@ -5,24 +5,9 @@
     android:layout_height="match_parent"
     android:contentDescription="outer_content_frame">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#CCCC"
-        android:contentDescription="action_bar_container_container">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:onClick="back"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="12dp"
-            android:text="返回"
-            android:textColor="#FFF"/>
-
-    </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="content_frame">
@@ -33,14 +18,23 @@
             android:layout_height="match_parent"
             android:contentDescription="page_content">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+
             <FrameLayout
+                android:id="@+id/controls_container"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:contentDescription="controls_container">
 
             </FrameLayout>
-
             <FrameLayout
+                android:id="@+id/background_container"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:contentDescription="background_container">
@@ -51,28 +45,47 @@
                     android:contentDescription="hero_promo">
 
                     <ImageView
-                        android:translationZ="100dp"
-                        android:onClick="toast"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerInParent="true"
+                        android:contentDescription="hero_image"
+                        android:onClick="toast"
                         android:src="@mipmap/ic_launcher_round"
-                        android:contentDescription="hero_image"/>
+                        android:translationZ="100dp"/>
                 </RelativeLayout>
 
             </FrameLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
 
         </FrameLayout>
 
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/overlay_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="overlay_frame">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/action_bar_container_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#CCCC"
+        android:contentDescription="action_bar_container_container">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:onClick="back"
+            android:padding="12dp"
+            android:text="返回"
+            android:textColor="#FFF"/>
+
+    </FrameLayout>
 
     <!-- <com.zonsim.nestedscroll.nestingscroll.MyParentLayout
          android:id="@+id/parent"
