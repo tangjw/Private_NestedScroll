@@ -18,21 +18,6 @@
             android:layout_height="match_parent"
             android:contentDescription="page_content">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
-
-
-            <FrameLayout
-                android:id="@+id/controls_container"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:contentDescription="controls_container">
-
-            </FrameLayout>
             <FrameLayout
                 android:id="@+id/background_container"
                 android:layout_width="match_parent"
@@ -56,18 +41,28 @@
 
             </FrameLayout>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+            <FrameLayout
+                android:onClick="toast"
+                android:id="@+id/controls_container"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="controls_container">
+
+            </FrameLayout>
+
 
         </FrameLayout>
 
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/overlay_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="overlay_frame">
-
-    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/action_bar_container_container"
@@ -84,6 +79,14 @@
             android:padding="12dp"
             android:text="返回"
             android:textColor="#FFF"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/overlay_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="overlay_frame">
 
     </FrameLayout>
 

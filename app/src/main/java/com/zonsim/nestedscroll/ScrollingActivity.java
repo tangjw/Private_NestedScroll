@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.zonsim.nestedscroll.nestingscroll.MyAdapter;
 
@@ -16,11 +18,13 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrolling);
-        
+        setContentView(R.layout.activity_scrolling2);
+    
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+    
+        final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.top);
     
         RecyclerView rv = findViewById(R.id.rv);
     
@@ -31,5 +35,27 @@ public class ScrollingActivity extends AppCompatActivity {
             data.add("item" + i);
         }
         rv.setAdapter(new MyAdapter(this, data));
+    
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                System.out.println(dy);
+                frameLayout.scrollBy(dx, dy);
+            }
+        });
+    }
+    
+    public void top(View view) {
+        Toast.makeText(this, "top", Toast.LENGTH_SHORT).show();
+    }
+    
+    public void bottom(View view) {
+        Toast.makeText(this, "bottom", Toast.LENGTH_SHORT).show();
     }
 }
