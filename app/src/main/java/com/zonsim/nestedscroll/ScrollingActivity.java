@@ -1,6 +1,7 @@
 package com.zonsim.nestedscroll;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,12 @@ import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity {
     
+    private float maxHeight;
+    private float minHeight;
+    
+    private float currHeight;
+    private CoordinatorLayout mCoordinatorLayout;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +31,16 @@ public class ScrollingActivity extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     
+        maxHeight = getResources().getDimension(R.dimen.scroll_title_max_height);
+        minHeight = getResources().getDimension(R.dimen.scroll_title_min_height);
+        currHeight = maxHeight;
+        
         final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.top);
     
         RecyclerView rv = findViewById(R.id.rv);
     
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        
         rv.setLayoutManager(new LinearLayoutManager(this));
     
         List<String> data = new ArrayList<>();
@@ -45,10 +58,18 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                System.out.println(dy);
-                frameLayout.scrollBy(dx, dy);
+                System.out.println("dy: " + dy);
+                System.out.println("currHeight1: " + currHeight);
+            
+                if (currHeight >= minHeight && currHeight <= maxHeight) {
+                    currHeight -= dy;
+                    System.out.println("currHeight2: " + currHeight);
+                    frameLayout.offsetTopAndBottom(-dy);
+                }
             }
         });
+    
+    
     }
     
     public void top(View view) {

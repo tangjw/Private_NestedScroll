@@ -25,4 +25,11 @@
         android:text="nestedScroll"
         android:textAllCaps="false"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="click3"
+        android:text="behavior"
+        android:textAllCaps="false"/>
+
 </LinearLayout>
