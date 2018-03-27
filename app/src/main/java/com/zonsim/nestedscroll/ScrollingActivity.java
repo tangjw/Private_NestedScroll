@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.zonsim.nestedscroll.nestingscroll.MyAdapter;
@@ -34,10 +37,18 @@ public class ScrollingActivity extends AppCompatActivity {
         maxHeight = getResources().getDimension(R.dimen.scroll_title_max_height);
         minHeight = getResources().getDimension(R.dimen.scroll_title_min_height);
         currHeight = maxHeight;
+    
+        //"http://view.bug.cn/uc/2332016.html"
 
 //        final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.top);
 //        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        WebView webView = (WebView) findViewById(R.id.webView);
+    
+        webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("https://m.17hbpx.com/html/news/detail/2150");
     
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -49,10 +60,15 @@ public class ScrollingActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.rv);
     
     
-        rv.setLayoutManager(new LinearLayoutManager(this));
-    
+        rv.setLayoutManager(new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        
         List<String> data = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 30; i++) {
             data.add("item" + i);
         }
         rv.setAdapter(new MyAdapter(this, data));
