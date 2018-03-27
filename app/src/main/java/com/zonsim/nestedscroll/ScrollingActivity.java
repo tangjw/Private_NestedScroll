@@ -1,12 +1,12 @@
 package com.zonsim.nestedscroll;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.zonsim.nestedscroll.nestingscroll.MyAdapter;
@@ -25,8 +25,8 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrolling2);
-    
+        setContentView(R.layout.activity_scrolling);
+        
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
@@ -34,13 +34,21 @@ public class ScrollingActivity extends AppCompatActivity {
         maxHeight = getResources().getDimension(R.dimen.scroll_title_max_height);
         minHeight = getResources().getDimension(R.dimen.scroll_title_min_height);
         currHeight = maxHeight;
-        
-        final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.top);
+
+//        final FrameLayout frameLayout = (FrameLayout) findViewById(R.id.top);
+//        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
     
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                System.out.println("verticalOffset: " + verticalOffset);
+            }
+        });
+        
         RecyclerView rv = findViewById(R.id.rv);
     
-        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
-        
+    
         rv.setLayoutManager(new LinearLayoutManager(this));
     
         List<String> data = new ArrayList<>();
@@ -48,28 +56,8 @@ public class ScrollingActivity extends AppCompatActivity {
             data.add("item" + i);
         }
         rv.setAdapter(new MyAdapter(this, data));
-    
-        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
+        //AppBarLayout
         
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                System.out.println("dy: " + dy);
-                System.out.println("currHeight1: " + currHeight);
-            
-                if (currHeight >= minHeight && currHeight <= maxHeight) {
-                    currHeight -= dy;
-                    System.out.println("currHeight2: " + currHeight);
-                    frameLayout.offsetTopAndBottom(-dy);
-                }
-            }
-        });
-    
-    
     }
     
     public void top(View view) {
